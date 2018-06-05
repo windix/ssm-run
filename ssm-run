@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# By default set RUN_CMD to AWS-RunShellScript used by Linux
+if [ -z "$RUN_CMD" ]; then
+  RUN_CMD=AWS-RunShellScript
+fi
+
 CMD=$1
 shift
 INSTANCE_IDS=$@
@@ -31,7 +36,7 @@ if [[ -z "$INSTANCE_IDS" || "$INSTANCE_IDS" =~ $ALL_SPACE ]]; then
 fi
 
 ID=$( aws ssm send-command \
-    --document-name AWS-RunShellScript \
+    --document-name $RUN_CMD \
     --instance-ids $INSTANCE_IDS \
     --parameters "$PARAMS" \
     --timeout-seconds 600 \
