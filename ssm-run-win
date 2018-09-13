@@ -2,5 +2,5 @@
 
 RUN_CMD=AWS-RunPowerShellScript
 
-MY_DIR=`dirname $0`
-. $MY_DIR/ssm-run
+MY_SSM_RUN=`which ssm-run`
+. $MY_SSM_RUN
